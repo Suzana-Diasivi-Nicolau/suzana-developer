@@ -1,323 +1,118 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-ao">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consultor Jurídico - Universidade</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* --- ESTILOS GERAIS E CORES --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Roboto', Arial, sans-serif;
-            background-color: #f4f7f9; 
-            color: #333;
-        }
-
-        /* --- ESTILO DO CABEÇALHO COM CARROSSEL --- */
-        .carousel-header {
-            position: relative;
-            height: 250px; 
-            overflow: hidden; 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            padding: 20px;
-        }
-
-        .carousel-item {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center center;
-            opacity: 0; 
-            transition: opacity 1.5s ease-in-out; 
-            background-blend-mode: overlay; 
-            background-color: rgba(0, 0, 0, 0.4); 
-        }
-
-        .carousel-item.active {
-            opacity: 1; 
-        }
-
-        /* Conteúdo do cabeçalho sobre o carrossel */
-        .header-content {
-            position: relative; 
-            z-index: 10; 
-            text-align: center;
-        }
-
-        .header-content h1 {
-            font-size: 2.5em;
-            font-weight: 700;
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
-            margin: 0;
-            padding: 10px 20px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 5px;
-        }
-
-        /* --- ESTILO DA PÁGINA CENTRAL (Main) --- */
-        main {
-            text-align: center; 
-            padding: 50px 20px;
-            background-color: #ffffff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            margin: -50px auto 30px; 
-            position: relative;
-            max-width: 90%;
-            border-radius: 10px;
-        }
-
-        main h2 {
-            color: #0D47A1; 
-            margin-bottom: 5px;
-            font-weight: 700;
-            font-size: 1.8em; 
-        }
-
-        /* --- ESTILO DO ÍCONE DE CHAT CENTRALIZADO (WhatsApp) --- */
-        .chatbot-centered-icon {
-            display: inline-flex; 
-            justify-content: center;
-            align-items: center;
-            
-            margin-top: 25px; 
-            /* Cor verde para WhatsApp */
-            background-color: #25D366; 
-            color: white;
-            width: 70px; 
-            height: 70px;
-            border-radius: 50%; 
-            font-size: 2.2em; 
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
-            transition: background-color 0.3s, transform 0.3s;
-            text-decoration: none; 
-        }
-
-        .chatbot-centered-icon:hover {
-            background-color: #128C7E; 
-            transform: scale(1.1); 
-        }
-        
-        /* --- ESTILO DO RODAPÉ SIMPLIFICADO --- */
-        
-        .footer-principal {
-            background-color: #142F4D; 
-            color: white;
-            margin-top: 40px;
-            padding-top: 20px; 
-        }
-
-        /* Seção de links (agora apenas Suporte) */
-        .footer-links-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
-            text-align: center; 
-        }
-        
-        .footer-col-single {
-            max-width: 300px; 
-            margin: 0 auto;
-            text-align: left;
-        }
-
-        .footer-col-single h3 {
-            font-size: 1.2em;
-            margin-bottom: 15px;
-            font-weight: 700;
-            color: #BBDEFB;
-            text-align: center;
-        }
-
-        .footer-col-single ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        /* Estilo para o botão "Sobre Nós" */
-        .footer-col-single ul li button {
-            background: none;
-            border: none;
-            color: #CFD8DC; 
-            text-decoration: none;
-            line-height: 2;
-            font-size: 0.95em;
-            display: block; 
-            width: 100%;
-            text-align: center;
-            padding: 0;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        
-        .footer-col-single ul li button:hover {
-            color: #ffffff;
-        }
-
-        /* Estilo para os outros links */
-        .footer-col-single ul li a {
-            color: #CFD8DC; 
-            text-decoration: none;
-            line-height: 2;
-            font-size: 0.95em;
-            display: block; 
-            transition: color 0.3s;
-            text-align: center;
-        }
-
-        .footer-col-single ul li a:hover {
-            color: #ffffff;
-        }
-
-        /* Estilo para a caixa de informação que aparecerá (começa oculta) */
-        #sobre-info-box {
-            color: #BBDEFB;
-            font-size: 0.9em;
-            padding: 10px;
-            margin-top: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
-            display: none; /* Oculta a informação por padrão */
-            text-align: center;
-        }
-        
-        /* Seção inferior (Direitos Autorais) */
-        .footer-bottom {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9em;
-            color: #CFD8DC;
-        }
-
-        .footer-bottom .logo-info {
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            gap: 10px; 
-            margin-bottom: 10px;
-        }
-        
-        .footer-bottom .logo-info span {
-            font-size: 1.1em; 
-            font-weight: 700;
-        }
-    </style>
+    <kbd><link rel="stylesheet" href="style.css"></kbd>
+    <title>Aurediasi tecnology</title>
 </head>
+
 <body>
-    
-   <header class="carousel-header">
-    
-    <div class="carousel-item active" style="background-image: url('Imagem 1.JPG');"></div>
-    
-    <div class="carousel-item" style="background-image: url('Imagem 2.JPG');"></div>
-    <div class="carousel-item" style="background-image: url('imagem 3.JPG');"></div>
-    <div class="carousel-item" style="background-image: url('imagem 8.JPG');"></div>
-    <div class="carousel-item" style="background-image: url('descarregar (1).jpg');"></div>
-    <div class="carousel-item" style="background-image: url('descarregar (4).jpg');"></div>
-    <div class="carousel-item" style="background-image: url('descarregar (5).jpg');"></div>
-    <div class="carousel-item" style="background-image: url('descarregar (6).jpg');"></div>
-    <div class="carousel-item" style="background-image: url('descarregar (7).jpg');"></div>
-    <div class="header-content">
-        <h1>Bem-Vindo ao seu assistente virtual</h1> 
-    </div>
-</header>
-
+    <header>
+        <nav class="navbar">
+            <div class="Logo">Sarah Café & Pastelaria</div>
+            <ul class="nav-links">
+                <li><a href="#home">inicio</a></li>
+                <li><a href="#sobre">sobre</a></li>
+                <li><a href="#produtos">produtos</a></li>
+                <li><a href="#localizacao">localização</a></li>
+            </ul>
+        </nav>
+    </header>
     <main>
-        <h2>NORMAI - Consultor Jurídico Virtual</h2>
-        <p>Obtenha orientação jurídica rápida e prática através do nosso assistente virtual.</p>
-        
-       <a 
-        id="open-chatbot-icon" 
-        class="chatbot-centered-icon" 
-        href="https://api.whatsapp.com/send?phone=15817019840&text= DCYS2L"
-        target="_blank"
-        title="Abrir WhatsApp NORMAI"
-    >
-        <i class="fab fa-whatsapp"></i> 
-    </a>
-        </a>
-        </main>
+        <section id="home" class="hero">
+            <div class="hero-conteudo">
+                <h1>Bem Vindo à Sarah Café & Pastelaria</h1>
+                <p>Descubra o sabor autêntico do cafe artesanal e de cada pedaço de bolo</p>
+                <a href="#produtos" class="btn">Conheça nossos cafés</a>
+            </div>
+        </section>
 
-    <footer class="footer-principal">
-        <div class="footer-links-section">
-            
-            <div class="footer-col-single">
-                <h3>Suporte e Contactos</h3>
-                <ul>
-                    <li>
-                        <button id="btn-sobre">Sobre Nós (NORMAI)</button>
-                    </li>
-                    <div id="sobre-info-box">
-                    Estudantes do terceiro ano da Universidade Kimpa Vita.
+        <section id="sobre" class="sobre">
+            <div class="container">
+                <h2>Sobre Nós</h2>
+                <p>Há mais de 15 anos que Sarah Café & Pastelaria , trás melhor experiência em café artesanal e bolos para qualquer envento.Seleccionamos grãos
+                    especiais de produtores locais e preperamos cada xícara e massa com dedicaçáo e paixáo.
+                </p>
+            </div>
+        </section>
+
+        <section id="produtos" class="produtos">
+            <div class="container">
+                <h2>Nossos produtos</h2>
+                <div class="produtos-grid">
+                    <article class="produto-card">
+                        <div class="produto-icon">☕</div>
+                        <h3>Espresso</h3>
+                        <p>Café puro e intenso, preparado na pressão perfeita</p>
+                         <span class="preco">300,00 kwz</span>
+                    </article>
+
+                    <article class="produto-card">
+                        <div class="produto-icon">🥤</div>
+                        <h3>cappuccino</h3>
+                            <p>Cremoso e suave, com espuma de leite perfeita</p>
+                            <span class="preco">500,00 kwz</span>
+                    </article>
+
+                    <article class="produto-card">
+                        <div class="produto-icon">🍨</div>
+                        <h3>Café Gelado</h3>
+                            <p>Refrescante e saboroso para dias quentes</p>
+                            <span class="preco">200,00 kwz</span>
+                    </article>
+
+                    <article class="produto-card">
+                        <div class="produto-icon">🎂</div>
+                        <h3>Bolo com Cololate</h3>
+                            <p>Feito com amor sentido em cada mordida</p>
+                            <span class="preco">3500,00 kwz</span>
+                    </article>
+
+                    <article class="produto-card">
+                        <div class="produto-icon">🥮</div>
+                        <h3>Bolo Símples</h3>
+                            <p>Simplicidade que conquista qualquer paladar</p>
+                            <span class="preco">2500,00 kwz</span>
+                    </article>
+
+                    <article class="produto-card">
+                        <div class="produto-icon">👝</div>
+                        <h3>Bolo com Melaço</h3>
+                            <p>A doçura do melaço, transformada em arte</p>
+                            <span class="preco">3500,00 kwz</span>
+                    </article>
                 </div>
-                    <li><a href="#">Contactos</a></li>
-                    <li><a href="#">Guia de Utilização</a></li>
-                    
-                </ul>
-                
-                
             </div>
-            
-        </div>
-        
-        <div class="footer-bottom">
-            <div class="logo-info">
-                <span style="font-size: 1.1em; font-weight: 700;">NormAI</span>
-            </div>
-            
-            <p>Universidade kimpa vita</p>
-            <p>© Todos Direitos Reservados - NormAI 2025</p>
-        </div>
+        </section>
+
+
+        <section id="localizacao" class="localizacao">
+            <div class="container">
+                <h2>Onde estamos</h2>
+                <div class="contacto-info">
+                    <p>R. Aires de Mendes número 71,  Sarah café  Luanda</p>
+                    <p>tel: (+244) 932 919 940</p>
+                    <p>suzanadiasivinicolau@gmail.com</p>
+                 </div>
+                <div class="mapa">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15770.195167156697!2d13.21157955541991!3d-8.828388099999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1a51f31c708a9bd5%3A0xee9d7737d0009274!2sSarah%20Caf%C3%A9%20%26%20Pastelaria!5e0!3m2!1spt-PT!2sao!4v1773231255697!5m2!1spt-PT!2sao"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+             </div>
+        </section>
+    </main>
+    <footer>
+        <p>2026 café aroma-Todos os direitos reservados</p>
     </footer>
-    
-    <script>
-        // Lógica do Carrossel (MANTIDA)
-        const carouselItems = document.querySelectorAll('.carousel-item');
-        let currentIndex = 0;
 
-        function showNextImage() {
-            carouselItems[currentIndex].classList.remove('active');
-            currentIndex = (currentIndex + 1) % carouselItems.length;
-            carouselItems[currentIndex].classList.add('active');
-        }
-
-        setInterval(showNextImage, 5000); 
-
-        // LÓGICA PARA O BOTÃO 'SOBRE NÓS' (MANTIDA)
-        const btnSobre = document.getElementById('btn-sobre');
-        const sobreInfoBox = document.getElementById('sobre-info-box');
-
-        if (btnSobre && sobreInfoBox) {
-            btnSobre.addEventListener('click', () => {
-                if (sobreInfoBox.style.display === 'none' || sobreInfoBox.style.display === '') {
-                    sobreInfoBox.style.display = 'block';
-                } else {
-                    sobreInfoBox.style.display = 'none';
-                }
-            });
-        }
-        
-        // A lógica de clique do ícone centralizado foi removida do JS, pois agora ele é um link HTML simples.
-        
-    </script>
-
-    <script src="https://cdn.botpress.cloud/webchat/v3.3/inject.js"></script>
-<script src="https://files.bpcontent.cloud/2025/11/09/09/20251109095455-L3NDHS69.js" defer></script>
-     
+    <script 
+ async 
+ src="https://app.gptmaker.ai/widget/3F060F4D6322B38714209EDCD510FD69/float.js">
+</script>
 </body>
+
 </html>
